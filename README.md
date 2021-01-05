@@ -6,7 +6,6 @@
 | ------------------ | ------ | ------------------------- |
 | nickname           | string | null: false               |
 | email              | string | null: false, unique: true |
-| password           | string | null: false               |
 | encrypted_password | string | null: false               |
 | last_name          | string | null: false               |
 | first_name         | string | null: false               |
@@ -17,7 +16,7 @@
 ### Association
 
 - has_many :items
-- has_one :order
+- has_many :order
 
 ## items テーブル
 
@@ -59,6 +58,7 @@
 | prefecture    | string     | null: false                    |
 | municipality  | string     | null: false                    |
 | address       | string     | null: false                    |
+| building      | string     |                                |
 | phone_number  | integer    | null: false                    |
 | order_id      | references | null: false, foreign_key: true |
 
