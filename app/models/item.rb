@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  has_one_attached :image
+
   with_options presence: true do
     validates :name
     validates :explanation
@@ -9,7 +11,8 @@ class Item < ApplicationRecord
     validates :day_id
     validates :price
     validates :user
+    validates :image
   end
-
+  
   belongs_to :user
 end
