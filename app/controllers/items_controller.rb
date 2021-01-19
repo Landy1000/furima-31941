@@ -6,12 +6,10 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    pull_down
   end
 
   def create
     @item = Item.new(item_params)
-    pull_down
     if @item.save
       redirect_to root_path
     else
@@ -30,11 +28,4 @@ class ItemsController < ApplicationController
     end
   end
 
-  def pull_down
-    @categories = Category.all
-    @states = State.all
-    @shipping_fees = ShippingFee.all
-    @shipping_places = ShippingPlace.all
-    @days = Day.all
-  end
 end
