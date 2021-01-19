@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @item = FactoryBot.build(:item)
+    @item = FactoryBot.build(:item, :attachImage)
   end
 
   describe '商品出品機能' do
@@ -83,22 +83,19 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include "Price Half-width number"
       end
       it "priceが299以下では登録できない" do
-        @item.price = Faker::Number.between(from: -500, to: 299)
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include "Price Out of setting range"
       end
       it "priceが10000000以上では登録できない" do
-        @item.price = Faker::Number.between(from: 10000000, to: 9999999999)
+        @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include "Price Out of setting range"
       end
       it "imageが空では登録できない" do
-        item = Item.new(name: Gimei.kanji, explanation: Gimei.kanji, category_id: Faker::Number.between(from: 2, to: 11), 
-                        state_id: Faker::Number.between(from: 2, to: 7), shipping_fee_id: Faker::Number.between(from: 2, to: 3), 
-                        shipping_place_id: Faker::Number.between(from: 2, to: 48), day_id: Faker::Number.between(from: 2, to: 4), 
-                        price: Faker::Number.between(from: 300, to: 9999999))
-        item.valid?
-        expect(item.errors.full_messages).to include "Image can't be blank"
+        @item = FactoryBot.build(:item)
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Image can't be blank"
       end
     end
   end
