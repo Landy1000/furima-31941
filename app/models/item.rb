@@ -17,7 +17,7 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  with_options presence: true, numericality: { other_than: 1 , message: 'Select'}  do
+  with_options presence: true, numericality: { other_than: 1, message: 'Select' } do
     validates :category_id
     validates :state_id
     validates :shipping_fee_id
@@ -26,6 +26,7 @@ class Item < ApplicationRecord
   end
 
   validates :price, presence: true
-  validates_numericality_of :price, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'Out of setting range'
+  validates_numericality_of :price, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
+                                    message: 'Out of setting range'
   validates_numericality_of :price, only_integer: true, message: 'Half-width number'
 end
