@@ -91,12 +91,18 @@
     </form>
   </div>
   <div class="links">
-    <a href="#" class="change-item-btn">
-      ＜ 前の商品
-    </a>
-    <a href="#" class="change-item-btn">
-      後ろの商品 ＞
-    </a>
+    <% if Item.exists?(id: @item.id - 1) %>
+      <%= link_to '＜ 前の商品', item_path(@item.id - 1), class: "change-item-btn" %>
+    <% else %>
+      <a href="#" class="change-item-btn"></a>
+    <% end %>
+
+    <% if Item.exists?(id: @item.id + 1) %>
+      <%= link_to '後ろの商品 ＞', item_path(@item.id + 1), class: "change-item-btn" %>
+    <% else %>
+      <a href="#" class="change-item-btn"></a>
+    <% end %>
+
   </div>
   <%# リンク未実装 %>
   <a href=“#” class=‘another-item’><%= @item.category.name %>をもっと見る</a>
