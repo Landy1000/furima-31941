@@ -25,8 +25,8 @@ class ItemsController < ApplicationController
 
   def destroy
     item = Item.find(params[:id])
-    item.destroy 
-    redirect_to root_path 
+    item.destroy
+    redirect_to root_path
   end
 
   private
@@ -45,8 +45,6 @@ class ItemsController < ApplicationController
   end
 
   def remove_illegal_user
-    unless current_user.id == Item.find(params[:id]).user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless current_user.id == Item.find(params[:id]).user_id
   end
 end
