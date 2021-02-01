@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
-  before_action :set_item, only: [:show]
-  before_action :remove_illegal_user, only: [:destroy]
+  before_action :set_item, only: [:edit, :update, :show, :destroy]
+  before_action :remove_illegal_user, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -20,12 +20,22 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
+
   def show
   end
 
   def destroy
-    item = Item.find(params[:id])
-    if item.destroy
+    if @item.destroy
       redirect_to root_path
     else
       render :show
@@ -48,6 +58,6 @@ class ItemsController < ApplicationController
   end
 
   def remove_illegal_user
-    redirect_to action: :index unless current_user.id == Item.find(params[:id]).user_id
+    redirect_to action: :index unless current_user.id == @item.user_id
   end
 end
