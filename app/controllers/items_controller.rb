@@ -58,6 +58,6 @@ class ItemsController < ApplicationController
   end
 
   def remove_illegal_user
-    redirect_to action: :index unless current_user.id == Item.find(params[:id]).user_id
+    redirect_to action: :index unless current_user.id == @item.user_id
   end
 end
