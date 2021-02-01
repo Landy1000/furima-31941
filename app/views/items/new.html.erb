@@ -3,7 +3,7 @@
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
   </header>
   
-  <%= render partial:'shared/form', locals:{ item: @item , btn: "出品する" } %>
+  <%= render partial:'shared/form', locals:{ item: @item , btn: "出品する" , path: root_path } %>
 
   <footer class="items-sell-footer">
     <ul class="menu">
