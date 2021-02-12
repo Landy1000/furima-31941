@@ -30,8 +30,8 @@
         <p class='or-text'>or</p>
         <%= link_to '削除', item_path(@item.id), method: :delete, data: { confirm: '削除しますか？' }, class:'item-destroy' %>
 
-      <% else %>
-        <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+      <% elsif Order.find_by(item_id: @item.id) == nil %>
+        <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
       <% end %>
 
     <% end %>
