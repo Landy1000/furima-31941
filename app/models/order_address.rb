@@ -1,12 +1,13 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :post_number, :prefecture_id, :municipality, :address, :building, :phone_number, :user_id, :item_id
+  attr_accessor :post_number, :prefecture_id, :municipality, :address, :building, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
     validates :municipality
     validates :address
     validates :user_id
     validates :item_id
+    validates :token
   end
 
   with_options presence: true, numericality: { other_than: 1, message: 'Select' } do
