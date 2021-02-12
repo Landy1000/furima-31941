@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :remove_sold_item, only: [:index, :create]
+
   def index
     @order_address = OrderAddress.new
   end
@@ -25,4 +28,11 @@ class OrdersController < ApplicationController
     params.require(:order_address).permit(:post_number, :prefecture_id, :municipality, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
+  def remove_sold_item
+    redirect_to root_path unless Order.find_by(item_id: @item.id) == nil
+  end
+
+  def remove_item_user
+    redirect_to action: :index unless current_user.id == @item.user_id
+  end
 end
