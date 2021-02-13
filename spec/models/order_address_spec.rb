@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
-
   before do
     @order_address = FactoryBot.build(:order_address)
   end
 
   describe '商品の購入' do
-
     context '商品購入がうまくいくとき' do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@order_address).to be_valid
@@ -27,7 +25,7 @@ RSpec.describe OrderAddress, type: :model do
       it 'post_numberに-がないと登録できない' do
         @order_address.post_number = Faker::Number.number(digits: 7)
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include "Post number Input correctly"
+        expect(@order_address.errors.full_messages).to include 'Post number Input correctly'
       end
       it 'prefecture_idが空では登録できない' do
         @order_address.prefecture_id = ''
@@ -57,9 +55,9 @@ RSpec.describe OrderAddress, type: :model do
       it 'phone_numberに-がないと登録できない' do
         @order_address.phone_number = Faker::PhoneNumber.phone_number
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include "Phone number Input only number"
+        expect(@order_address.errors.full_messages).to include 'Phone number Input only number'
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
