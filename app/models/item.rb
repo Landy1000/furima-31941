@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_place
   belongs_to :day
 
-  has_one_attached :image
+  has_many_attached :images
 
   belongs_to :user
   has_one :order
@@ -15,7 +15,7 @@ class Item < ApplicationRecord
     validates :name
     validates :explanation
     validates :user
-    validates :image
+    validates :images
   end
 
   with_options presence: true, numericality: { other_than: 1, message: 'Select' } do

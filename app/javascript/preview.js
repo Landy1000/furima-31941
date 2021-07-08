@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function(){
      // 表示する画像を生成
       const blobImage = document.createElement('img');
       blobImage.setAttribute('src', blob);
-      blobImage.setAttribute("id", "image-sample");
+      blobImage.setAttribute("class", "image-sample");
      // 生成したHTMLの要素をブラウザに表示させる
       imageElement.appendChild(blobImage);
       ImageList.appendChild(imageElement);
@@ -19,15 +19,22 @@ document.addEventListener('DOMContentLoaded', function(){
 
     document.getElementById('item-image').addEventListener('change', function(e){
       // 画像が表示されている場合のみ、すでに存在している画像を削除する
-      const imageContent = document.querySelector('img');
-      if (imageContent){
-        imageContent.remove();
+      while(ImageList.firstChild){
+        ImageList.removeChild(ImageList.firstChild)
       }
 
-      const file = e.target.files[0];
-      const blob = window.URL.createObjectURL(file);
-      
-      createImageHTML(blob);
+      if (e.target.files.length === 1){
+        const file = e.target.files[0];
+        const blob = window.URL.createObjectURL(file);
+        createImageHTML(blob);
+      }else{
+        const fileLength = e.target.files.length;
+        for (let i = 0; i < fileLength; i++) {
+          const file = e.target.files[i];
+          const blob = window.URL.createObjectURL(file);
+          createImageHTML(blob);
+        }
+      }
     });
   }
 });
